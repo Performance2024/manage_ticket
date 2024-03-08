@@ -10,7 +10,7 @@ use Illuminate\Support\Facades\Auth;
 
 class LoginForm extends Component
 {
-    #[Validate('required'),Validate('email')]
+    #[Validate('required'), Validate('email')]
     public string $email;
 
     #[Validate('required')]
@@ -24,7 +24,7 @@ class LoginForm extends Component
 
         if (Auth::attempt(['email' => $this->email, 'password' => $this->password], $this->remember)) {
             request()->session()->regenerate();
-            return redirect()->intended('/dashboard');
+            return redirect()->intended()->route('dashboard');
         }
 
         return back()->withErrors([

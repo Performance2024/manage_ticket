@@ -2,8 +2,12 @@
 
 namespace Database\Seeders;
 
-use Illuminate\Database\Console\Seeds\WithoutModelEvents;
+use App\Models\Agent;
+use App\Models\Fonction;
+use App\Models\Service;
 use Illuminate\Database\Seeder;
+use Spatie\Permission\Models\Role;
+use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 
 class AgentSeeder extends Seeder
 {
@@ -12,6 +16,14 @@ class AgentSeeder extends Seeder
      */
     public function run(): void
     {
-        //
+        $service = Service::whereName('search-dev')->first()->id;
+        $fonction = Fonction::whereName('dev')->first()->id;
+
+        Agent::create([
+            'name' => 'Big Administrateur',
+            'email' => 'admin@ticketexpress.com',
+            'fonction_id' => $fonction,
+            'service_id' => $service
+        ]);
     }
 }
